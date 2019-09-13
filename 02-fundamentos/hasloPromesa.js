@@ -3,32 +3,32 @@ let jugadores = [{
     id:1,
     nombre:'Carlos',
     goles:15,
-    posición:'Medio',
-    número:5
+    posicion:'Medio',
+    numero:5
 },{
     id:2,
     nombre:'Juan',
     goles:8,
-    posición:'Defensa',
-    número:17
+    posicion:'Defensa',
+    numero:17
 },{
     id:3,
     nombre:'Messi',
     goles:27,
-    posición:'Delantero',
-    número:10
+    posicion:'Delantero',
+    numero:10
 },{
     id:4,
     nombre:'Chicharito',
     goles:20,
-    posición:'Delantero',
-    número:14
+    posicin:'Delantero',
+    numero:14
 },{
     id:5,
     nombre:'Jimenez',
     goles:16,
-    posición:'Delantero',
-    número:9
+    posicion:'Delantero',
+    numero:9
 }];
 
 let formaGol = [{
@@ -44,10 +44,6 @@ let formaGol = [{
     forma:'tiro libre',
     contra:'Veracruz'
 },{
-    id:3,
-    forma:'penal',
-    contra:'León'
-},{
     id:4,
     forma:'cañonazo',
     contra:'Tigres'
@@ -62,7 +58,9 @@ let getJugador = (id)=>{
     return new Promise( (resolve, reject)=>{
         let jugadorBD = jugadores.find(jugador => jugador.id === id);
         if(!jugadorBD){
-            reject(`El jugador ${jugador.nombre} No existe`);
+            reject(`El jugador No existe`);
+        }else{
+            resolve(jugadorBD);
         }
     });
 }
@@ -71,6 +69,30 @@ let getJugador = (id)=>{
 //OBTENER FORMA GOL
 let getFormaGol = (jugador)=>{
     return new Promise( (resolve, reject)=>{
-
+        let formaBD = formaGol.find(forma => forma.id === jugador.id);
+        if(!formaBD){
+            reject(`El jugador del Gol No existe`);
+        }else{
+            resolve({
+                id:jugador.id,
+                nombre:jugador.nombre,
+                forma:formaBD.forma
+            })
+        }
     });
 }
+
+
+
+//Llamanos el getJugador
+getJugador(2).then(jugador=>{
+    console.log('El jugador', jugador);
+    //LLAMAMOS EL getformaGol
+    getFormaGol(jugador).then(resp=>{
+        //obtener la forma de gol segun ID del jugador
+        console.log(`La forma de Gol del jugador: ${resp.nombre} es de ${resp.forma}`);
+    });
+}, (err)=>{
+    console.log(err);
+});
+//console.log(formaGol);
