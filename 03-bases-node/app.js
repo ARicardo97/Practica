@@ -1,3 +1,5 @@
+//const argv = require('yargs').argv;
+
 //cuando viene llaves despues de un let o un cost...significa que es una destructuración
 const { crearArchivo} = require('./multiplicar/multiplicar');
 
