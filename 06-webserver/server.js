@@ -5,6 +5,9 @@ const app = express()
 const hbs = require('hbs');
 require('./hbs/helpers');
 
+//conociendo el puerto
+const port = process.env.PORT || 3000;
+
 //middleware
 app.use( express.static(__dirname + '/public'));
 
@@ -37,9 +40,9 @@ app.get('/about', (req, res)=>{
 });
 
 //escuchando en el puerto
-app.listen(3000)
-console.log('escuchando...')
-
+app.listen(port, ()=>{
+    console.log(`Escuchando peticiones... en el puerto ${port}`);
+});
 
 
     //APUNTES
